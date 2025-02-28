@@ -1,54 +1,19 @@
 import 'dart:io';
 
 void main() {
-  double numeroUm = 0;
-  double numeroDois = 0;
-  String entrada = "";
-  List<String> operacoes = <String>["+", "-", "/", "*"];
+  List<String> fileTypes = ['pdf', 'jpg', 'png', 'docx'];
 
-  void somar() {
-    print(numeroUm + numeroDois);
-  }
+  void checarTipoArquivo(List<String> fileTypes) {
+    print('Qual o tipo do seu arquivo?\ntipos de arquivos -> pdf, jpg, png, docx: ');
+    String input = stdin.readLineSync() ?? '';
 
-  void subtrair() {
-    print(numeroUm - numeroDois);
-  }
-
-  void multiplicacao() {
-    print(numeroUm * numeroDois);
-  }
-
-  void divisao() {
-    print(numeroUm / numeroDois);
-  }
-
-  void getOperacao() {
-    print('Informe sua operação ${operacoes.toString()}: ');
-    entrada = stdin.readLineSync()!;
-    if (!operacoes.contains(entrada)) {
-      getOperacao();
+    if (fileTypes.contains(input.toLowerCase())) {
+      print('Tipo de Arquivo ' + input + ' v�lido.');
+    } else {
+      print('Tipo de Arquivo ' + input + ' inv�lido.');
+      checarTipoArquivo(fileTypes);
     }
   }
 
-  print('Informe um número: ');
-  numeroUm = double.parse(stdin.readLineSync()!);
-  getOperacao();
-  print('Informe outro número: ');
-  numeroDois = double.parse(stdin.readLineSync()!);
-
-  print('Resultado: ');
-  switch (entrada) {
-    case '+':
-      somar();
-      break;
-    case '-':
-      subtrair();
-      break;
-    case '/':
-      divisao();
-      break;
-    case '*':
-      multiplicacao();
-      break;
-  }
+  checarTipoArquivo(fileTypes);
 }
