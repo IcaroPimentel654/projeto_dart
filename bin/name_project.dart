@@ -1,54 +1,18 @@
 import 'dart:io';
 
+//Validaçao de categorias de produtos em um sistema de estoque.
 void main() {
-  double numeroUm = 0;
-  double numeroDois = 0;
-  String entrada = "";
-  List<String> operacoes = <String>["+", "-", "/", "*"];
+  List<String> categorias = ['eletronicos', 'alimentos', 'vestuario', 'livros'];
+  
+  while(true){
+    print('Digite a categoria do produto: eletronicos, alimentos, vestuario, livros\n');
+    String categoria = stdin.readLineSync() ?? '';
 
-  void somar() {
-    print(numeroUm + numeroDois);
-  }
-
-  void subtrair() {
-    print(numeroUm - numeroDois);
-  }
-
-  void multiplicacao() {
-    print(numeroUm * numeroDois);
-  }
-
-  void divisao() {
-    print(numeroUm / numeroDois);
-  }
-
-  void getOperacao() {
-    print('Informe sua operação ${operacoes.toString()}: ');
-    entrada = stdin.readLineSync()!;
-    if (!operacoes.contains(entrada)) {
-      getOperacao();
+    if (categorias.contains(categoria.toLowerCase())) {
+      print('Categoria válida: ' + categoria);
+      break;
+    } else {
+      print('Categoria inválida.');
     }
-  }
-
-  print('Informe um número: ');
-  numeroUm = double.parse(stdin.readLineSync()!);
-  getOperacao();
-  print('Informe outro número: ');
-  numeroDois = double.parse(stdin.readLineSync()!);
-
-  print('Resultado: ');
-  switch (entrada) {
-    case '+':
-      somar();
-      break;
-    case '-':
-      subtrair();
-      break;
-    case '/':
-      divisao();
-      break;
-    case '*':
-      multiplicacao();
-      break;
   }
 }
