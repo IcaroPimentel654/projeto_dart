@@ -1,54 +1,39 @@
 import 'dart:io';
 
 void main() {
-  double numeroUm = 0;
-  double numeroDois = 0;
-  String entrada = "";
-  List<String> operacoes = <String>["+", "-", "/", "*"];
+  Map<String, String> operationsMethods = {
+    "deposito": "Depósito",
+    "retirada": "Retirada",
+    "transferencia": "Transferência",
+    "pagamento": "Pagamento",
+  };
 
-  void somar() {
-    print(numeroUm + numeroDois);
-  }
-
-  void subtrair() {
-    print(numeroUm - numeroDois);
-  }
-
-  void multiplicacao() {
-    print(numeroUm * numeroDois);
-  }
-
-  void divisao() {
-    print(numeroUm / numeroDois);
-  }
-
-  void getOperacao() {
-    print('Informe sua operação ${operacoes.toString()}: ');
-    entrada = stdin.readLineSync()!;
-    if (!operacoes.contains(entrada)) {
-      getOperacao();
+  double getOperationValue() {
+    print("\nDigite o valor da operação:");
+    String valueInput = stdin.readLineSync()!;
+    if (double.tryParse(valueInput) == null) {
+      print("\nValor inválido. Tente novamente.");
+      return getOperationValue();
     }
+    return double.parse(valueInput);
   }
 
-  print('Informe um número: ');
-  numeroUm = double.parse(stdin.readLineSync()!);
-  getOperacao();
-  print('Informe outro número: ');
-  numeroDois = double.parse(stdin.readLineSync()!);
-
-  print('Resultado: ');
-  switch (entrada) {
-    case '+':
-      somar();
-      break;
-    case '-':
-      subtrair();
-      break;
-    case '/':
-      divisao();
-      break;
-    case '*':
-      multiplicacao();
-      break;
+  String getOperationMethods() {
+    print(
+      "\nDigite uma operação (deposito, retirada, transferencia, pagamento):",
+    );
+    String operationInput = stdin.readLineSync()!.toLowerCase();
+    if (!operationsMethods.containsKey(operationInput)) {
+      print("\nOperação inválida. Tente novamente.");
+      return getOperationMethods();
+    }
+    return operationInput;
   }
+
+  String operation = getOperationMethods();
+  double value = getOperationValue();
+
+  print(
+    "\nOperação escolhida: ${operationsMethods[operation]}, Valor: $value\n",
+  );
 }
