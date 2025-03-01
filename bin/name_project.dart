@@ -4,13 +4,15 @@ void main() {
   List<String> fileTypes = ['pdf', 'jpg', 'png', 'docx'];
 
   void checarTipoArquivo(List<String> fileTypes) {
-    print('Qual o tipo do seu arquivo?\ntipos de arquivos -> pdf, jpg, png, docx: ');
+    print(
+      'Qual o tipo do seu arquivo?\ntipos de arquivos -> pdf, jpg, png, docx: ',
+    );
     String input = stdin.readLineSync() ?? '';
 
     if (fileTypes.contains(input.toLowerCase())) {
-      print('Tipo de Arquivo ' + input + ' válido.');
+      print('Tipo de Arquivo $input vï¿½lido.');
     } else {
-      print('Tipo de Arquivo ' + input + ' inválido.');
+      print('Tipo de Arquivo $input invï¿½lido.');
       checarTipoArquivo(fileTypes);
     }
   }
