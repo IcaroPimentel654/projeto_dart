@@ -11,11 +11,14 @@ void main() {
   double getOperationValue() {
     print("\nDigite o valor da operação:");
     String valueInput = stdin.readLineSync()!;
-    if (double.tryParse(valueInput) == null) {
+    double? value = double.tryParse(valueInput);
+
+    if (value == null || value <= 0) {
       print("\nValor inválido. Tente novamente.");
       return getOperationValue();
     }
-    return double.parse(valueInput);
+
+    return value;
   }
 
   String getOperationMethods() {
